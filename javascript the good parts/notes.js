@@ -25,6 +25,7 @@ alert(digit_name(3));   // 'three'
 
 
 //MODULE PATTERN
+//A constructer is a function that returns an object
 //make an object with 2 methods that have share acces to a private variable
 var singleton = (function () {
     var privateVariable;
@@ -152,3 +153,71 @@ function compseb(function1, function2){
         return function2(function1(a, b), c);
     }
 }
+
+//function that only gets called once
+//add_once(3,4) //7
+//add_once(3,4) !boom
+
+function once(func){
+    return function(){
+        var f = func;
+        func = null;
+        return f.apply(
+            this,
+            arguments
+        );
+    }
+}
+
+//could also do this using the 3 wishes protocall set variable to 3 and decrement each time its used.
+
+
+//basic module pattern
+var Module = (function () {
+  
+  return {
+    publicMethod: function () {
+      // code
+    }
+  };
+
+})();
+
+//write a factory function
+//counter = counterf(10)
+//counter.inc() //11
+//counter.dec() //10
+
+var counterf = (function (value){
+
+    return {
+        inc: function(){
+            value += 1;
+            return value;
+        },
+        dec: function(){
+            value -= 1;
+            return value;
+        }
+    };
+
+})();
+
+//temp = revocable(alert);
+//a factory that can can call a function once and if you call the other it wont call it again
+
+var revocable = (function (value){
+
+    return{
+        invoke: function (){
+            return value.apply(
+                this,
+                arguments
+            );
+        },
+        revoke: function (){
+            value = null;
+        }
+    };
+
+})();
