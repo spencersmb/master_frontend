@@ -217,7 +217,20 @@ for( var i=0; i < myFarm.length; i++){
 
 console.log(myFarm[0]);
 
+///
+// SCOPE
+////////
 
+var g = 'global';
 
+function go() {
+	var i = 'local';
+	var g = 'in here!';
+	alert(g + ' inside scope');
+}
+
+go();
+//go doesnt effect global scope. When writting varaibles.
+alert(g + " outside scope");
 
 
